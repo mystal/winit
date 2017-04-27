@@ -325,7 +325,7 @@ pub enum VirtualKeyCode {
 /// Represents the current state of the keyboard modifiers
 ///
 /// Each field of this struct represents a modifier and is `true` if this modifier is active.
-#[derive(Default, Debug, Clone, Copy)]
+#[derive(Default, Debug, Clone, Copy, PartialEq, Eq)]
 pub struct ModifiersState {
     /// The "shift" key
     pub shift: bool,
@@ -337,4 +337,13 @@ pub struct ModifiersState {
     ///
     /// This is the "windows" key on PC and "command" key on Mac.
     pub logo: bool
+}
+
+impl ModifiersState {
+    pub fn is_all(&self) -> bool {
+        self.shift &&
+            self.ctrl &&
+            self.alt &&
+            self.logo
+    }
 }
